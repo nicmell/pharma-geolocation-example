@@ -25,17 +25,18 @@ export type PharmaData = {
 
 export type PharmaDataResponse = PharmaData[]
 
-async function fetchData() {
-  return  await axios.get<PharmaDataResponse>(
-    'https://dati.comune.milano.it/dataset/7e18f0d3-b7f1-49b7-969d-da2c04131dd6/resource/1d71ca1e-a6b2-4984-8e35-a0bd9163bbca/download/ds501_elenco_farmacie_milano_final.json',
-    {
-      headers: {
-        Accept: 'application/json',
+const pharmaClient = {
+  fetchData: async function() {
+    return  await axios.get<PharmaDataResponse>(
+      'https://dati.comune.milano.it/dataset/7e18f0d3-b7f1-49b7-969d-da2c04131dd6/resource/1d71ca1e-a6b2-4984-8e35-a0bd9163bbca/download/ds501_elenco_farmacie_milano_final.json',
+      {
+        headers: {
+          Accept: 'application/json',
+        },
       },
-    },
-  )
+    )
+  }
 }
 
-export default {
-  fetchData
-}
+
+export default pharmaClient
