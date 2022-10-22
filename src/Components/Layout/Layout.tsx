@@ -1,33 +1,28 @@
-import React, {useEffect} from "react";
-import {PropsWithChildren} from "react";
+import React, {PropsWithChildren, useEffect} from "react";
 
-import {RefreshOutlined} from "@mui/icons-material";
-import {AppBar, CircularProgress, Container, IconButton} from "@mui/material";
+import {CircularProgress, Container} from "@mui/material";
 
-import usePharmaData from "../../Hooks/usePharmaData";
+import NavBar from "@/Components/Layout/NavBar/NavBar";
+import usePharmaData from "@/Hooks/usePharmaData";
 
 export type LayoutProps = PropsWithChildren
 
 export default function Layout({children}: LayoutProps) {
   const {fetchData, isLoading} = usePharmaData()
-  useEffect(() => {fetchData()}, [fetchData])
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   return (
     <div style={{height: '100vh', display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
-      <AppBar color='transparent' elevation={0} position='relative'>
-        <div style={{display: 'flex'}}>
-        <IconButton size='large'>
-          <RefreshOutlined onClick={() => fetchData()}/>
-        </IconButton>
-        </div>
-      </AppBar>
+      <NavBar/>
       <Container component='main' style={{flexGrow: 1}}>
         {
           isLoading ?
             <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}>
               <CircularProgress/>
             </div> :
-          children
+            children
         }
       </Container>
     </div>

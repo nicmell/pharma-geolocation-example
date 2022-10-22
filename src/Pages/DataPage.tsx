@@ -2,8 +2,8 @@ import React from "react";
 
 import {DataGrid, GridColDef} from "@mui/x-data-grid";
 
-import usePharmaData from "../Hooks/useFetchData";
-import {PharmaData} from "../Services/pharmaClient";
+import usePharmaData from "@/Hooks/usePharmaData";
+import {PharmaData} from "@/Services/pharmaClient";
 
 const columns : GridColDef[] = [
   {"field": "CODICE_ASL"},
@@ -28,7 +28,7 @@ const columns : GridColDef[] = [
 ]
 
 
-export default function GridPage() {
+export default function DataPage() {
   const {data = [], error} = usePharmaData()
   return (
     <div style={{height: '100%', padding: '32px 0'}}>

@@ -1,20 +1,20 @@
 import React from 'react';
 
 import {CssBaseline, ThemeProvider} from "@mui/material";
+import {BrowserRouter} from "react-router-dom";
 
-import Layout from "../Components/Layout/Layout";
-import GridPage from "../Pages/GridPage";
-import theme from "../Theme/Theme";
+import MainRouter from "@/Routers/MainRouter";
+import theme from "@/Theme/Theme";
 
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <Layout>
-        <GridPage/>
-      </Layout>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+          <MainRouter/>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
 

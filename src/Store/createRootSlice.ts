@@ -1,6 +1,6 @@
 import {immer} from "zustand/middleware/immer";
 
-import pharmaClient, {PharmaDataResponse} from "../Services/pharmaClient";
+import pharmaClient, {PharmaDataResponse} from "@/Services/pharmaClient";
 
 
 export type StoreState = {

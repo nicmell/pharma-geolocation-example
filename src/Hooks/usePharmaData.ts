@@ -1,6 +1,6 @@
 
-import {PharmaDataResponse} from "../Services/pharmaClient";
-import useStore from "./useStore";
+import useStore from "@/Hooks/useStore";
+import {PharmaDataResponse} from "@/Services/pharmaClient";
 
 export type FetchDataResponse = (
   {
@@ -24,5 +24,5 @@ export type FetchDataResponse = (
 
 export default function usePharmaData() : FetchDataResponse  {
   const {data, error, isLoading, fetchData} = useStore()
-  return {data, error, isLoading, fetchData: () => fetchData()} as FetchDataResponse
+  return {data, error, isLoading, fetchData} as FetchDataResponse
 }
