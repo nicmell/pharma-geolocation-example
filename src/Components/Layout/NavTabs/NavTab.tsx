@@ -4,25 +4,22 @@ import {forwardRef, useMemo} from "react";
 import {Tab, TabProps} from "@mui/material";
 import {NavLink, NavLinkProps} from "react-router-dom";
 
-export type NavTabProps = TabProps & {
-  to: NavLinkProps['to']
-}
-
+export type NavTabProps = TabProps
 
 export default function NavTab (props: NavTabProps) {
-  const {to, ...other} = props
+  const {value, ...other} = props
   const linkComponent = useMemo(
     () => forwardRef<HTMLAnchorElement, Omit<NavLinkProps, 'to'>>(
       function TabLink (props: Omit<NavLinkProps, 'to'>, ref) {
         return (
-          <NavLink ref={ref} to={to} {...props}/>
+          <NavLink ref={ref} to={value} {...props}/>
         )
       })
-    , [to]) as React.ComponentType
+    , [value]) as React.ComponentType
   return (
     <Tab
       component={linkComponent}
-      value={to}
+      value={value}
       {...other}
     />
   )

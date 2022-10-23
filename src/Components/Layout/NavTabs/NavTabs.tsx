@@ -1,22 +1,19 @@
 
-import React, {SyntheticEvent} from 'react'
+import React from 'react'
 
 import {Tabs} from '@mui/material'
+import {useLocation} from "react-router-dom";
 
 import NavTab from "@/Components/Layout/NavTabs/NavTab";
 
 
 
 function NavTabs () {
-  const [value, setValue] = React.useState<number>(0)
-
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
+  const {pathname} = useLocation()
   return (
-    <Tabs onChange={handleChange} value={value}>
-      <NavTab label='Home' to='/'/>
-      <NavTab label='Data' to='/data'/>
+    <Tabs value={pathname}>
+      <NavTab label='Home' value='/'/>
+      <NavTab label='Data' value='/data'/>
     </Tabs>
   )
 }

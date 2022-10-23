@@ -9,8 +9,8 @@ import usePharmaData from "@/Hooks/usePharmaData";
 export default function RefreshButton() {
   const {fetchData} = usePharmaData()
   return (
-    <IconButton size='large'>
-      <RefreshOutlined onClick={() => fetchData()}/>
+    <IconButton onClick={() => fetchData()} size='large'>
+      <RefreshOutlined/>
     </IconButton>
   )
 }
