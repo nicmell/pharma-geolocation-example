@@ -29,19 +29,13 @@ const columns : GridColDef[] = [
 
 
 export default function DataPage() {
-  const {data = [], error} = usePharmaData()
+  const {data = []} = usePharmaData()
   return (
-    <div style={{height: '100%', padding: '32px 0'}}>
-      {
-        error ?
-          <span>{error.message}</span>  :
-          <DataGrid
-            columns={columns}
-            getRowId={({CODICE_NAZIONALE}: PharmaData) => CODICE_NAZIONALE}
-            rows={data}
-          />
-
-      }
-    </div>
+    <DataGrid
+      columns={columns}
+      getRowId={({CODICE_NAZIONALE}: PharmaData) => CODICE_NAZIONALE}
+      rows={data}
+      style={{height: '100%'}}
+    />
   )
 }

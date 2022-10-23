@@ -16,7 +16,7 @@ export default function Layout({children}: LayoutProps) {
   return (
     <div style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
       <NavBar/>
-      <Container component='main' style={{flex: 1}}>
+      <Container component='main' style={{flex: 1, paddingBottom: '48px'}}>
           {
             isLoading ?
               <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}>

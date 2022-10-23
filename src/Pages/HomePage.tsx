@@ -48,7 +48,6 @@ export default function HomePage() {
     }
   }
   return (
-    <div style={{height: '100%'}}>
       <Grid alignItems='center' container justifyContent='center'>
         <Grid item md={6} xs={12}>
           {
@@ -59,6 +58,5 @@ export default function HomePage() {
           { renderResult() }
         </Grid>
       </Grid>
-    </div>
   )
 }
