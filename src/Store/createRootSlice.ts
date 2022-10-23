@@ -2,22 +2,22 @@ import {immer} from "zustand/middleware/immer";
 
 import pharmaClient from "@/Services/pharmaClient";
 import {TravelMode} from "@/Typings/google-maps";
-import {PharmaDataResponse} from "@/Typings/pharma";
+import {StoreState} from "@/Typings/store";
 
 
-
-export type StoreState = {
-  travelMode: TravelMode
-  data?: PharmaDataResponse
-  error?: Error
-  isLoading: boolean
-  fetchData: () => Promise<void>
-}
-
-
-export default immer<StoreState>((set) => {
+export default immer<StoreState>((set,  get) => {
   return {
-    travelMode: 'DRIVING',
+    appSettings: {
+      travelMode: 'DRIVING',
+      useCoordinates: false,
+      switchTravelMode: function (travelMode: TravelMode) {
+        set((state) => {state.appSettings.travelMode = travelMode})
+      },
+      toggleUseCoordinates: function () {
+        const {appSettings} = get()
+        set((state) => {state.appSettings.useCoordinates = !appSettings.useCoordinates})
+      }
+    },
     data: undefined,
     isLoading: false,
     error: undefined,
@@ -31,6 +31,6 @@ export default immer<StoreState>((set) => {
       } finally {
         set((state) => {state.isLoading = false})
       }
-    }
+    },
   }
 })
