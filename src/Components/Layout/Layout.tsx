@@ -14,16 +14,16 @@ export default function Layout({children}: LayoutProps) {
   }, [fetchData])
 
   return (
-    <div style={{height: '100vh', display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+    <div style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
       <NavBar/>
-      <Container component='main' style={{flexGrow: 1}}>
-        {
-          isLoading ?
-            <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}>
-              <CircularProgress/>
-            </div> :
-            children
-        }
+      <Container component='main' style={{flex: 1,  padding: '32px 0'}}>
+          {
+            isLoading ?
+              <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}>
+                <CircularProgress/>
+              </div> :
+              children
+          }
       </Container>
     </div>
   )

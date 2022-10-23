@@ -4,11 +4,10 @@ import {Route, Routes} from "react-router-dom";
 
 import Layout from "@/Components/Layout/Layout";
 import DataPage from "@/Pages/DataPage";
+import HomePage from "@/Pages/HomePage";
 
 
-function HomePage() {
-  return null;
-}
+
 
 export default function MainRouter() {
   return (

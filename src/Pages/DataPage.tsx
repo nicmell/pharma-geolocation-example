@@ -3,7 +3,7 @@ import React from "react";
 import {DataGrid, GridColDef} from "@mui/x-data-grid";
 
 import usePharmaData from "@/Hooks/usePharmaData";
-import {PharmaData} from "@/Services/pharmaClient";
+import {PharmaData} from "@/Typings/pharma";
 
 const columns : GridColDef[] = [
   {"field": "CODICE_ASL"},

@@ -1,6 +1,6 @@
 
 import useStore from "@/Hooks/useStore";
-import {PharmaDataResponse} from "@/Services/pharmaClient";
+import {PharmaDataResponse} from "@/Typings/pharma";
 
 export type FetchDataResponse = (
   {

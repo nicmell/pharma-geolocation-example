@@ -1,9 +1,13 @@
 import {immer} from "zustand/middleware/immer";
 
-import pharmaClient, {PharmaDataResponse} from "@/Services/pharmaClient";
+import pharmaClient from "@/Services/pharmaClient";
+import {TravelMode} from "@/Typings/google-maps";
+import {PharmaDataResponse} from "@/Typings/pharma";
+
 
 
 export type StoreState = {
+  travelMode: TravelMode
   data?: PharmaDataResponse
   error?: Error
   isLoading: boolean
@@ -13,6 +17,7 @@ export type StoreState = {
 
 export default immer<StoreState>((set) => {
   return {
+    travelMode: 'DRIVING',
     data: undefined,
     isLoading: false,
     error: undefined,
