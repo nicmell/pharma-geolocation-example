@@ -2,7 +2,9 @@ import {Loader} from "@googlemaps/js-api-loader";
 
 import {DistanceMatrixResponse, LatLngLiteral, TravelMode} from "@/Typings/google-maps";
 
-export let distanceMatrixService: google.maps.DistanceMatrixService;
+
+let distanceMatrixService: google.maps.DistanceMatrixService;
+let geocoderService: google.maps.Geocoder;
 
 (async function loadGoogleApiService() {
   const googleApiLoader = new Loader({
@@ -11,10 +13,14 @@ export let distanceMatrixService: google.maps.DistanceMatrixService;
   });
   const googleApi = await googleApiLoader.load()
   distanceMatrixService = new googleApi.maps.DistanceMatrixService()
+  geocoderService = new googleApi.maps.Geocoder()
 })()
 
 const googleMapsClient = {
-  getDinstanceMatrix: async function(origin: LatLngLiteral, destinations: LatLngLiteral[], travelMode: TravelMode) {
+  geocode: async function(latLng: LatLngLiteral) {
+    return await geocoderService.geocode({location: latLng})
+  },
+  getDistanceMatrix: async function(origin: LatLngLiteral, destinations: LatLngLiteral[], travelMode: TravelMode) {
     return await distanceMatrixService.getDistanceMatrix({
       origins: [origin], destinations, travelMode: travelMode as google.maps.TravelMode
     }) as DistanceMatrixResponse
