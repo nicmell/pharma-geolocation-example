@@ -28,7 +28,7 @@ export default function useComputeMinimumDistance():
   return async (origin: LatLngLiteral, travelMode: TravelMode) => {
     const pharmaData = sortByEuclideanDistance(origin, data).slice(0, 25)
     const resp = await googleMapsClient
-      .getDinstanceMatrix(origin, pharmaData.map(({LAT, LNG}) => ({lat: LAT, lng: LNG})), travelMode)
+      .getDistanceMatrix(origin, pharmaData.map(({LAT, LNG}) => ({lat: LAT, lng: LNG})), travelMode)
     const elements = resp.rows[0].elements
     const aggregatedData = elements.map((elt, i) => [pharmaData[i], elt])
     return aggregatedData[0] as [PharmaData, DistanceMatrixResponseElement]

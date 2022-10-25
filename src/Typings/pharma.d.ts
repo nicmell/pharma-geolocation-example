@@ -20,4 +20,3 @@ export type PharmaData = {
   LAT: number
   LOCATION: string
 }
-export type PharmaDataResponse = PharmaData[]

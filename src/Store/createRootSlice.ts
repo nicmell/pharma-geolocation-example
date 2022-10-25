@@ -7,6 +7,16 @@ import {StoreState} from "@/Typings/store";
 
 export default immer<StoreState>((set,  get) => {
   return {
+    form: {
+      input: undefined,
+      setInput(input) {
+        set((state) => {state.form.input = input})
+      },
+      result: undefined,
+      setResult(result) {
+        set((state) => {state.form.input = result})
+      }
+    },
     appSettings: {
       travelMode: 'DRIVING',
       useCoordinates: false,

@@ -1,11 +1,12 @@
 import axios from "axios";
 
-import {PharmaDataResponse} from "@/Typings/pharma";
+import {PharmaData} from "@/Typings/pharma";
+
 
 
 const pharmaClient = {
   fetchData: async function() {
-    return  await axios.get<PharmaDataResponse>(
+    return  await axios.get<PharmaData[]>(
       `${process.env.REACT_APP_PHARMA_DATASET_URL}`,
       {
         headers: {

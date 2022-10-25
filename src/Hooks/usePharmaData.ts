@@ -1,12 +1,12 @@
 
 import useStore from "@/Hooks/useStore";
-import {PharmaDataResponse} from "@/Typings/pharma";
+import {PharmaData} from "@/Typings/pharma";
 
 export type FetchDataResponse = (
   {
   isLoading: true
   error?: Error | undefined
-  data?: PharmaDataResponse
+  data?: PharmaData[]
 }
   | {
   isLoading: false
@@ -16,7 +16,7 @@ export type FetchDataResponse = (
   | {
   isLoading: false
   error?: undefined
-  data: PharmaDataResponse
+  data: PharmaData[]
 }) &
 {
   fetchData: () => Promise<void>
