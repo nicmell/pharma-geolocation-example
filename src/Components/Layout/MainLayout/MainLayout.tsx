@@ -1,14 +1,16 @@
 import React, {PropsWithChildren, useEffect} from "react";
 
-import {CircularProgress, Container} from "@mui/material";
+import {Container} from "@mui/material";
 
+import Loader from "@/Components/Feedback/Loader/Loader";
 import NavBar from "@/Components/Layout/NavBar/NavBar";
+import ErrorBoundary from "@/Components/Misc/ErrorBoundary/ErrorBoundary";
 import usePharmaData from "@/Hooks/usePharmaData";
 
 export type LayoutProps = PropsWithChildren
 
-export default function Layout({children}: LayoutProps) {
-  const {fetchData, isLoading} = usePharmaData()
+export default function MainLayout({children}: LayoutProps) {
+  const {fetchData, isLoading, error} = usePharmaData()
   useEffect(() => {
     fetchData()
   }, [fetchData])
@@ -19,10 +21,10 @@ export default function Layout({children}: LayoutProps) {
       <Container component='main' style={{flex: 1, paddingBottom: '48px'}}>
           {
             isLoading ?
-              <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}>
-                <CircularProgress/>
-              </div> :
-              children
+              <Loader/> :
+              <ErrorBoundary error={error}>
+                {children}
+              </ErrorBoundary>
           }
       </Container>
     </div>

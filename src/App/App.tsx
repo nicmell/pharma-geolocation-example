@@ -3,7 +3,7 @@ import React from 'react';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {BrowserRouter} from "react-router-dom";
 
-import MainRouter from "@/Routers/MainRouter";
+import MainRouter from "@/Routers/MainRouter/MainRouter";
 import theme from "@/Theme/Theme";
 
 

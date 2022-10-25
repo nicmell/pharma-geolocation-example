@@ -9261,6 +9261,7 @@ __metadata:
     react-router-dom: ^6.4.2
     react-scripts: 5.0.1
     typescript: 4.4.2
+    use-error-boundary: ^2.0.6
     web-vitals: ^2.1.0
     zustand: ^4.1.2
   languageName: unknown
@@ -12188,6 +12189,19 @@ __metadata:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"use-error-boundary@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "use-error-boundary@npm:2.0.6"
+  peerDependencies:
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+  checksum: 07c61f517954f718c241670eb69463c603fd6baf376a78c472570fb4332c008be22833335342fa261238d5172dea51e486466d6d584fefc82be15ec624715d6c
   languageName: node
   linkType: hard
 

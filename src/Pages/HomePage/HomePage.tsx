@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 import {Alert, AlertTitle, Grid} from "@mui/material";
 
+import ErrorMessage from "@/Components/Feedback/ErrorMessage/ErrorMessage";
 import {GoogleAutocompleteForm} from "@/Components/Forms/GoogleAutocompleteForm/GoogleAutocompleteForm";
 import {LatLngForm} from "@/Components/Forms/LatLngForm/LatLngForm";
 import useAppSettings from "@/Hooks/useAppSettings";
@@ -30,10 +31,7 @@ export default function HomePage() {
   const renderResult = () => {
     if (error) {
       return (
-        <Alert severity='success'>
-        <AlertTitle>{'Errore!'}</AlertTitle>
-          {error.message}
-        </Alert>
+        <ErrorMessage error={error}/>
       )
     } else if (result) {
       const [pharmaData, distanceInfo] = result

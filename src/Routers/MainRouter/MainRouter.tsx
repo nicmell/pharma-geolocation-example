@@ -2,20 +2,20 @@ import React from "react";
 
 import {Route, Routes} from "react-router-dom";
 
-import Layout from "@/Components/Layout/Layout";
-import DataPage from "@/Pages/DataPage";
-import HomePage from "@/Pages/HomePage";
+import MainLayout from "@/Components/Layout/MainLayout/MainLayout";
+import DataPage from "@/Pages/DataPage/DataPage";
+import HomePage from "@/Pages/HomePage/HomePage";
 
 
 
 
 export default function MainRouter() {
   return (
-    <Layout>
+    <MainLayout>
       <Routes>
         <Route element={<HomePage/>} path='/'/>
         <Route element={<DataPage/>} path='/data'/>
       </Routes>
-    </Layout>
+    </MainLayout>
   )
 }
