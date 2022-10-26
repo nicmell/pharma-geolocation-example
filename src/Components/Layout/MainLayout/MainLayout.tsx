@@ -18,7 +18,7 @@ export default function MainLayout({children}: LayoutProps) {
   return (
     <div style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
       <NavBar/>
-      <Container component='main' style={{flex: 1, paddingBottom: '48px'}}>
+      <Container component='main' style={{flex: 1, paddingTop: '16px', paddingBottom: '48px'}}>
           {
             isLoading ?
               <Loader/> :

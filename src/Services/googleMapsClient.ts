@@ -17,8 +17,10 @@ let geocoderService: google.maps.Geocoder;
 })()
 
 const googleMapsClient = {
-  geocode: async function(latLng: LatLngLiteral) {
-    return await geocoderService.geocode({location: latLng})
+  geocode: async function(geocodeInfo: LatLngLiteral | string) {
+    return await geocoderService.geocode(
+      typeof geocodeInfo === 'string' ? {address: geocodeInfo} : {location: geocodeInfo}
+    )
   },
   getDistanceMatrix: async function(origin: LatLngLiteral, destinations: LatLngLiteral[], travelMode: TravelMode) {
     return await distanceMatrixService.getDistanceMatrix({

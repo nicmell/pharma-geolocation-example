@@ -20,10 +20,12 @@ function GoogleAutocomplete({onPlaceSelected, onChange}: GoogleAutocompleteProps
   useImperativeHandle(ref, () => inputRef.current as unknown as HTMLInputElement);
   return (
       <TextField
+        InputLabelProps={{shrink: true}}
         fullWidth
         inputRef={inputRef}
         label='Indirizzo'
         onChange={onChange}
+        placeholder=''
         size='small'
         variant='outlined'
       />

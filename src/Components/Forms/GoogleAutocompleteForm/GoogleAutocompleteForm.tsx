@@ -4,20 +4,32 @@ import {Button, Stack} from "@mui/material";
 
 import GoogleAutocomplete from "@/Components/Widgets/GoogleAutocomplete/GoogleAutocomplete";
 import useForm from "@/Hooks/useForm";
+import googleMapsClient from "@/Services/googleMapsClient";
 import {LatLngLiteral, PlaceResult} from "@/Typings/google-maps";
 
 export type LatLngFormProps = PropsWithChildren<{
+  disabled?: boolean
   onSubmit?: (value: LatLngLiteral) => void
 }>
 
-export function GoogleAutocompleteForm({children, onSubmit}: LatLngFormProps) {
+export function GoogleAutocompleteForm({children, disabled, onSubmit}: LatLngFormProps) {
   const ref = useRef<HTMLInputElement>()
   const {input, setInput} = useForm()
   const [value, setValue] = useState<PlaceResult>()
 
-  const handleSubmit = () => {
-    const location = value?.geometry?.location
-    location && onSubmit && onSubmit({lat: location.lat(), lng: location.lng()})
+  const handleSubmit = async () => {
+    let location = value?.geometry?.location
+    if (location){
+      onSubmit && onSubmit({lat: location.lat(), lng: location.lng()})
+    } else {
+      try {
+        const {results} = await googleMapsClient.geocode(ref.current!.value)
+        location = results[0].geometry.location
+        onSubmit && onSubmit({lat: location.lat(), lng: location.lng()})
+      } catch (err) {
+        // TODO: error handling
+      }
+    }
   }
   const handlePlaceSelected = (placeResult: PlaceResult) => {
     if (ref.current && placeResult && placeResult.formatted_address) {
@@ -41,7 +53,7 @@ export function GoogleAutocompleteForm({children, onSubmit}: LatLngFormProps) {
       <GoogleAutocomplete onChange={handleChange} onPlaceSelected={handlePlaceSelected} ref={ref}/>
       {children}
       <Button
-        disabled={!value}
+        disabled={disabled}
         onClick={handleSubmit}
         size='small'
         variant='contained'

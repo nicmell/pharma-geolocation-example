@@ -7,14 +7,15 @@ import {LatLngLiteral} from "@/Typings/google-maps";
 
 export type LatLngFormProps = PropsWithChildren<{
   onSubmit?: (value: LatLngLiteral) => void
+  disabled?: boolean
 }>
 
-export function LatLngForm({children, onSubmit}: LatLngFormProps) {
+export function LatLngForm({children, disabled, onSubmit}: LatLngFormProps) {
   const {input, setInput} = useForm()
   const lat = typeof input === 'object' ? input.lat: undefined
   const lng = typeof input === 'object' ? input.lng: undefined
   const handleSubmit = () => {
-    onSubmit && onSubmit({lat: lat!, lng: lng!})
+    onSubmit && onSubmit({lat, lng})
   }
   const handleChange = (type: keyof LatLngLiteral) =>
     (evt:  React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -27,6 +28,7 @@ export function LatLngForm({children, onSubmit}: LatLngFormProps) {
   return (
     <Stack direction='column' spacing={4}>
       <TextField
+        InputLabelProps={{shrink: true}}
         label='Latitudine'
         onChange={handleChange('lat')}
         size='small'
@@ -34,6 +36,7 @@ export function LatLngForm({children, onSubmit}: LatLngFormProps) {
         value={lat}
       />
       <TextField
+        InputLabelProps={{shrink: true}}
         label='Longitudine'
         onChange={handleChange('lng')}
         size='small'
@@ -42,7 +45,7 @@ export function LatLngForm({children, onSubmit}: LatLngFormProps) {
       />
       {children}
       <Button
-        disabled={!lat || !lng}
+        disabled={disabled}
         onClick={handleSubmit}
         size='small'
         variant='contained'
