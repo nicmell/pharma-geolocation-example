@@ -3,16 +3,16 @@ import React, {useState} from "react";
 import {Alert, AlertTitle, Grid} from "@mui/material";
 
 import ErrorMessage from "@/Components/Feedback/ErrorMessage/ErrorMessage";
-import {GoogleAutocompleteForm} from "@/Components/Forms/GoogleAutocompleteForm/GoogleAutocompleteForm";
-import {LatLngForm} from "@/Components/Forms/LatLngForm/LatLngForm";
+import GeolocationForm from "@/Components/Forms/GeolocationForm/GeolocationForm";
 import useAppSettings from "@/Hooks/useAppSettings";
 import useComputeMinimumDistance, {ComputeMinimumDistanceResult} from "@/Hooks/useComputeMinimumDistance";
 import {LatLngLiteral} from "@/Typings/google-maps";
 
 
+
 export default function HomePage() {
   const computeMinimumDistance = useComputeMinimumDistance()
-  const {travelMode, useCoordinates} = useAppSettings()
+  const {travelMode} = useAppSettings()
 
   const [error, setError] = useState<Error>()
   const [result, setResult] = useState<ComputeMinimumDistanceResult>()
@@ -48,11 +48,9 @@ export default function HomePage() {
   return (
       <Grid alignItems='center' container justifyContent='center'>
         <Grid item md={6} xs={12}>
-          {
-            useCoordinates ?
-              <LatLngForm onSubmit={handleSubmit}/> :
-              <GoogleAutocompleteForm onSubmit={handleSubmit}/>
-          }
+          <GeolocationForm
+            onSubmit={handleSubmit}
+          />
           { renderResult() }
         </Grid>
       </Grid>

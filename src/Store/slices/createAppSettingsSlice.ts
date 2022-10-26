@@ -15,7 +15,9 @@ export default devtools(immer((set, get) => {
         },
         toggleUseCoordinates: function () {
           const {appSettings} = get()
-          set((state) => {state.appSettings.useCoordinates = !appSettings.useCoordinates})
+          set((state) => {
+            state.appSettings.useCoordinates = !appSettings.useCoordinates
+          })
         }
       }
   }

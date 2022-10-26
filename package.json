@@ -11,7 +11,9 @@
     "coverage": "yarn test --coverage"
   },
   "jest": {
-    "transformIgnorePatterns": ["node_modules/(?!axios)/"],
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ],
     "moduleNameMapper": {
       "@/(.*)": "<rootDir>/src/$1"
     }
@@ -57,6 +59,7 @@
     "react-google-autocomplete": "^2.7.0",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "react-use": "^17.4.0",
     "typescript": "4.4.2",
     "use-error-boundary": "^2.0.6",
     "web-vitals": "^2.1.0",
