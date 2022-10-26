@@ -1,4 +1,5 @@
-# Getting Started with Create React App
+# Pharma geolocation example
+A stateful app for finding pharmacies in Milan.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
