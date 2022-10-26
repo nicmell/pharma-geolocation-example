@@ -3,7 +3,6 @@ import axios from "axios";
 import {PharmaData} from "@/Typings/pharma";
 
 
-
 const pharmaClient = {
   fetchData: async function() {
     return  await axios.get<PharmaData[]>(

@@ -7,8 +7,6 @@ import DataPage from "@/Pages/DataPage/DataPage";
 import HomePage from "@/Pages/HomePage/HomePage";
 
 
-
-
 export default function MainRouter() {
   return (
     <MainLayout>

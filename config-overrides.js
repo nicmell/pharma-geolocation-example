@@ -2,15 +2,23 @@
 
 const {override} = require('customize-cra')
 
-const {alias, configPaths} = require('react-app-rewire-alias')
+const packageJson = require('./package.json')
+
+const {alias, aliasJest, configPaths} = require('react-app-rewire-alias')
 
 const aliasMap = configPaths('./tsconfig.paths.json')
 
 
-const setupAlias = () => config => {
-    return alias(aliasMap)(config)
-}
+const jest = override(
+  config => ({...config, ...packageJson.jest}),
+  config =>  aliasJest(aliasMap)(config)
+)
+
+const webpack = override(
+  config => alias(aliasMap)(config)
+)
 
 module.exports =  {
-    webpack: override(setupAlias())
+    jest,
+    webpack
 }
