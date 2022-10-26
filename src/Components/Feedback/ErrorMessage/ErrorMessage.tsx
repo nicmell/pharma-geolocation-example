@@ -8,9 +8,11 @@ export default function ErrorMessage({error}: ErrorMessageProps) {
   return (
     <Alert data-testid='error-message' severity='error'>
       <AlertTitle>{'Si è veirficato un errore!'}</AlertTitle>
-      { error.message }
-      <br/>
-      {error.stack}
+      {
+        process.env.NODE_ENV === 'development' && (
+          <>{ error.message }<br/>{error.stack}</>
+        )
+      }
     </Alert>
   )
 }
