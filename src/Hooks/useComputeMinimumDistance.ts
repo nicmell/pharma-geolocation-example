@@ -1,6 +1,8 @@
+import useAppSettings from "@/Hooks/useAppSettings";
+import useForm from "@/Hooks/useForm";
 import usePharmaData from "@/Hooks/usePharmaData";
 import googleMapsClient from "@/Services/googleMapsClient";
-import {DistanceMatrixResponseElement, LatLngLiteral, TravelMode} from "@/Typings/google-maps";
+import {DistanceMatrixResponseElement, LatLngLiteral} from "@/Typings/google-maps";
 import {PharmaData} from "@/Typings/pharma";
 
 export type ComputeMinimumDistanceResult = [PharmaData, DistanceMatrixResponseElement]
@@ -23,14 +25,20 @@ function sortByEuclideanDistance({lat, lng}: LatLngLiteral, data: PharmaData[]) 
 
 
 export default function useComputeMinimumDistance():
-  (origin: LatLngLiteral, travelMode: TravelMode) => Promise<ComputeMinimumDistanceResult> {
+  (origin: LatLngLiteral) => Promise<void> {
   const {data = []} = usePharmaData()
-  return async (origin: LatLngLiteral, travelMode: TravelMode) => {
-    const pharmaData = sortByEuclideanDistance(origin, data).slice(0, 25)
-    const resp = await googleMapsClient
-      .getDistanceMatrix(origin, pharmaData.map(({LAT, LNG}) => ({lat: LAT, lng: LNG})), travelMode)
-    const elements = resp.rows[0].elements
-    const aggregatedData = elements.map((elt, i) => [pharmaData[i], elt])
-    return aggregatedData[0] as [PharmaData, DistanceMatrixResponseElement]
+  const {setError, setResult} = useForm()
+  const {travelMode} = useAppSettings()
+  return async (origin: LatLngLiteral) => {
+    try {
+      const pharmaData = sortByEuclideanDistance(origin, data).slice(0, 25)
+      const resp = await googleMapsClient
+        .getDistanceMatrix(origin, pharmaData.map(({LAT, LNG}) => ({lat: LAT, lng: LNG})), travelMode)
+      const elements = resp.rows[0].elements
+      const aggregatedData = elements.map((elt, i) => [pharmaData[i], elt])
+      setResult(aggregatedData[0] as ComputeMinimumDistanceResult)
+    } catch (error) {
+      setError(error as Error)
+    }
   }
 }

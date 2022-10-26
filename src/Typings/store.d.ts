@@ -36,6 +36,8 @@ export interface FormState {
     setInput: (input: LatLng | string | undefined) => void
     result?: ComputeMinimumDistanceResult
     setResult: (result: ComputeMinimumDistanceResult) => void
+    error?: Error
+    setError: (error: Error) => void
   }
 }
 

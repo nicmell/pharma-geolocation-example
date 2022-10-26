@@ -9,7 +9,7 @@ import googleMapsClient from "@/Services/googleMapsClient";
 
 export default function GeolocationButton() {
   const {useCoordinates} = useAppSettings()
-  const {setInput} = useForm()
+  const {setInput, setError} = useForm()
   const {latitude: lat, longitude: lng, error, loading} = useGeolocation({enableHighAccuracy: true})
   const handleGeolocate = async () => {
     if (lat && lng) {
@@ -21,7 +21,7 @@ export default function GeolocationButton() {
           const {results} = await googleMapsClient.geocode(latLng)
           setInput(results[0].formatted_address)
         } catch (err) {
-          // TODO: error handling
+          setError(err as Error)
         }
       }
     }
