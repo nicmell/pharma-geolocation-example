@@ -8,6 +8,13 @@ import {AppSettingsState, StoreSlice} from "@/Typings/store";
 export default devtools(immer((set, get) => {
   return {
       appSettings: {
+        debug: false,
+        toggleDebug: function () {
+          const {appSettings} = get()
+          set((state) => {
+            state.appSettings.debug = !appSettings.debug
+          })
+        },
         travelMode: 'DRIVING',
         useCoordinates: false,
         switchTravelMode: function switchTravelMode(travelMode: TravelMode) {

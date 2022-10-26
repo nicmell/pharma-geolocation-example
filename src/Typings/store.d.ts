@@ -43,6 +43,8 @@ export interface FormState {
 
 export interface AppSettingsState {
   appSettings: {
+    debug: boolean
+    toggleDebug: () => void
     travelMode: TravelMode
     useCoordinates: boolean
     switchTravelMode: (travelMode: TravelMode) => void

@@ -4,6 +4,7 @@ import {AppBar} from "@mui/material";
 
 import NavTabs from "@/Components/Layout/NavTabs/NavTabs";
 import AppSettingsButton from "@/Components/Widgets/AppSettingsButton/AppSettingsButton";
+import DebugButton from "@/Components/Widgets/DebugButton/DebugButton";
 import RefreshButton from "@/Components/Widgets/RefreshButton/RefreshButton";
 
 export default function NavBar() {
@@ -13,6 +14,7 @@ export default function NavBar() {
         <div style={{flexGrow: 1}}>
           <NavTabs/>
         </div>
+        <DebugButton/>
         <AppSettingsButton/>
         <RefreshButton/>
       </div>
