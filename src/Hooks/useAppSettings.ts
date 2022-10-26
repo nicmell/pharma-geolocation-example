@@ -1,6 +1,6 @@
-import useStore from "@/Hooks/useStore";
+import store from "@/Store/store";
 
 
 export default function useAppSettings() {
-  return useStore((state) => state.appSettings)
+  return store(({appSettings}) => appSettings)
 }
