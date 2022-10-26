@@ -10,6 +10,6 @@ if [ -z "$REACT_APP_GOOGLE_PLACES_API_KEY" ]; then
 fi
 
 yarn install && yarn build
-docker buildx build --platform linux/amd64 -t $CONTAINER_IMAGE .
-docker run -p 80:80 ${CONTAINER_IMAGE}
+docker buildx build --platform linux/amd64 -t "${CONTAINER_IMAGE}" .
+docker run -p 80:80 "${CONTAINER_IMAGE}"
 
