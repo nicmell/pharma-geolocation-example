@@ -5,7 +5,7 @@ import googleMapsClient from "@/Services/googleMapsClient";
 import {DistanceMatrixResponseElement, LatLngLiteral} from "@/Typings/google-maps";
 import {PharmaData} from "@/Typings/pharma";
 
-export type ComputeMinimumDistanceResult = [PharmaData, DistanceMatrixResponseElement]
+export type ComputeMinimumDistanceResult = [PharmaData, DistanceMatrixResponseElement] | []
 
 function getEuclideanDistance(x1: number, y1: number, x2: number, y2: number) {
   return Math.hypot(x1 - x2, y1 - y2)
@@ -35,8 +35,12 @@ export default function useComputeMinimumDistance():
       const resp = await googleMapsClient
         .getDistanceMatrix(origin, pharmaData.map(({LAT, LNG}) => ({lat: LAT, lng: LNG})), travelMode)
       const elements = resp.rows[0].elements
-      const aggregatedData = elements.map((elt, i) => [pharmaData[i], elt])
-      setResult(aggregatedData[0] as ComputeMinimumDistanceResult)
+      if (elements.length > 1 && elements[0].status === 'OK') {
+        const aggregatedData = elements.map((elt, i) => [pharmaData[i], elt])
+        setResult(aggregatedData[0] as ComputeMinimumDistanceResult)
+      } else {
+        setResult([])
+      }
     } catch (error) {
       setError(error as Error)
     }

@@ -39,8 +39,8 @@ export function GoogleAutocompleteForm({children, disabled, onSubmit}: LatLngFor
   }
 
   useEffect(() => {
-    if (ref.current && typeof input === 'string') {
-      ref.current.value = input
+    if (ref.current && (typeof input === 'string' || !input)) {
+      ref.current.value = input || ''
     }
   }, [input])
 
