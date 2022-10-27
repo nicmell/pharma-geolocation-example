@@ -13,7 +13,14 @@ export default create<StoreState>()((...args) => {
   return {
     ...createPharmaSlice(...args),
     ...createAppSettingsSlice(...args),
-    ...createFormSlice(...args)
-  }
+    ...createFormSlice(...args),
+    reset: function () {
+      const get = args[1] as () => StoreState
+      const {pharma, appSettings, form} = get()
+      appSettings.reset()
+      form.reset()
+      pharma.fetchData()
+    }
+   }
 })
 

@@ -11,7 +11,9 @@ import {PharmaData} from "@/Typings/pharma";
 export type StoreState =
   PharmaState &
   AppSettingsState &
-  FormState
+  FormState & {
+  reset: () => void
+}
 
 
 export type StoreSlice<T> = StateCreator<
@@ -35,9 +37,10 @@ export interface FormState {
     input?: LatLng | string
     setInput: (input: LatLng | string | undefined) => void
     result?: ComputeMinimumDistanceResult
-    setResult: (result: ComputeMinimumDistanceResult) => void
+    setResult: (result: ComputeMinimumDistanceResult | undefined) => void
     error?: Error
-    setError: (error: Error) => void
+    setError: (error: Error | undefined) => void
+    reset: () => void
   }
 }
 
@@ -49,6 +52,7 @@ export interface AppSettingsState {
     useCoordinates: boolean
     switchTravelMode: (travelMode: TravelMode) => void
     toggleUseCoordinates: () => void
+    reset: () => void
   }
 }
 

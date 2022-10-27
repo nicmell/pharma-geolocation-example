@@ -3,13 +3,13 @@ import React from "react";
 import {RefreshOutlined} from "@mui/icons-material";
 import {IconButton} from "@mui/material";
 
-import usePharmaData from "@/Hooks/usePharmaData";
+import store from "@/Store/store";
 
 
 export default function RefreshButton() {
-  const {fetchData} = usePharmaData()
+  const reset = store((store) => store.reset)
   return (
-    <IconButton onClick={fetchData} size='large'>
+    <IconButton onClick={reset} size='large'>
       <RefreshOutlined/>
     </IconButton>
   )

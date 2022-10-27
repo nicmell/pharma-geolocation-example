@@ -4,16 +4,19 @@ import {DirectionsBike, DirectionsCar, DirectionsTransit, DirectionsWalk} from "
 import {Button, ButtonGroup, ButtonProps, Typography} from "@mui/material";
 
 import useAppSettings from "@/Hooks/useAppSettings";
+import useForm from "@/Hooks/useForm";
 import {TravelMode} from "@/Typings/google-maps";
 
 
 
 export default function TravelModeSwitch() {
 
+  const {reset: resetForm} = useForm()
   const {travelMode, switchTravelMode} = useAppSettings()
 
   const handleChange =(value: TravelMode) => () => {
     switchTravelMode(value)
+    resetForm()
   }
 
   function buttonProps (mode: TravelMode) : ButtonProps {

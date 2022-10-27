@@ -9,7 +9,7 @@ export default devtools(immer((set) => {
   return {
     pharma: {
       data: undefined,
-      isLoading: false,
+      isLoading: true,
       error: undefined,
       fetchData: async function () {
         set((state) => {state.pharma.isLoading = true})
