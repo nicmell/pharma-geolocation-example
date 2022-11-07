@@ -1,8 +1,8 @@
-import React, {PropsWithChildren, useEffect} from "react";
+import React, {PropsWithChildren} from "react";
 
 import {Container} from "@mui/material";
+import {useMeasure} from "react-use";
 
-import DebugLayout from "../DebugLayout/DebugLayout";
 import Loader from "@/Components/Feedback/Loader/Loader";
 import NavBar from "@/Components/Layout/NavBar/NavBar";
 import ErrorBoundary from "@/Components/Misc/ErrorBoundary/ErrorBoundary";
@@ -10,28 +10,23 @@ import usePharmaData from "@/Hooks/usePharmaData";
 
 export type LayoutProps = PropsWithChildren
 
-
-
 export default function MainLayout({children}: LayoutProps) {
-  const {fetchData, isLoading, error} = usePharmaData()
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
-
+  const {isLoading, error} = usePharmaData()
+  const [ref, {height}] = useMeasure<HTMLDivElement>();
   return (
-    <div style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
-      <DebugLayout>
+    <div style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
         <NavBar/>
-        <Container component='main' style={{flex: 1, paddingTop: '16px', paddingBottom: '48px'}}>
-          {
-            isLoading ?
-              <Loader/> :
-              <ErrorBoundary error={error}>
-                {children}
-              </ErrorBoundary>
-          }
+        <Container component='main' ref={ref} style={{flex: 1, paddingTop: '16px', paddingBottom: '64px'}}>
+          <div style={{height: `${height}px`}}>
+            {
+              isLoading ?
+                <Loader/> :
+                <ErrorBoundary error={error}>
+                  {children}
+                </ErrorBoundary>
+            }
+          </div>
         </Container>
-      </DebugLayout>
     </div>
   )
 }

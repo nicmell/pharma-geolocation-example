@@ -23,6 +23,5 @@ export type FetchDataResponse = (
 };
 
 export default function usePharmaData() : FetchDataResponse  {
-  const {data, error, isLoading, fetchData} = store(({pharma}) => pharma)
-  return {data, error, isLoading, fetchData} as FetchDataResponse
+  return store(({pharma}) => pharma) as FetchDataResponse
 }

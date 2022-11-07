@@ -1,32 +1,27 @@
-import React, {ReactElement} from "react";
+import React, {PropsWithChildren} from "react";
 
 import ReactJson from "react-json-view";
 
-import useAppSettings from "@/Hooks/useAppSettings";
+import MainLayout from "@/Components/Layout/MainLayout/MainLayout";
 import store from "@/Store/store";
 
 
-export type DebugLayoutProps = {children: ReactElement[]}
+export type LayoutProps = PropsWithChildren
 
-export default function DebugLayout({children}: DebugLayoutProps) {
-  const {debug} = useAppSettings()
+export default function DebugLayout({children}: LayoutProps) {
   const storeData = JSON.parse(JSON.stringify(store()))
-  if (debug) {
     return (
-      <div style={{height: '100%'}}>
-        <div style={{height: '50vh', overflow: 'scroll'}}>
-          {children}
+      <div style={{height: '100vh'}}>
+        <div style={{height: '50vh', overflowY: 'scroll'}}>
+          <MainLayout>
+            {children}
+          </MainLayout>
         </div>
-        <div style={{height: '50vh', position: 'relative',  overflow: 'scroll'}}>
-          <ReactJson
-            src={storeData}
-            style={{backgroundColor: 'rgba(0, 0, 0, 0.06)', padding: '16px', borderTop: 'solid 1px rgba(0, 0, 0, 0.16)'}}
-          />
+        <div style={{height: '50vh', overflowY: 'scroll', backgroundColor: 'rgba(0, 0, 0, 0.06)'}}>
+          <div style={{padding: '16px'}}>
+            <ReactJson src={storeData}/>
+          </div>
         </div>
       </div>
     )
-  }
-  return (
-    <>{children}</>
-  )
 }

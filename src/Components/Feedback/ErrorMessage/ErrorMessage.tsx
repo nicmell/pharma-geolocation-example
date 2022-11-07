@@ -1,18 +1,20 @@
 import React  from 'react'
 
-import {Alert, AlertTitle} from "@mui/material";
+import FeedbackMessage from "@/Components/Feedback/FeedbackMessage/FeedbackMessage";
 
 export type ErrorMessageProps = {error: Error}
 
 export default function ErrorMessage({error}: ErrorMessageProps) {
   return (
-    <Alert data-testid='error-message' severity='error'>
-      <AlertTitle>{'Si è veirficato un errore!'}</AlertTitle>
-      {
-        process.env.NODE_ENV === 'development' && (
-          <>{ error.message }<br/>{error.stack}</>
-        )
-      }
-    </Alert>
+      <FeedbackMessage severity='error' title='Si è veirficato un errore!'>
+        {
+          process.env.NODE_ENV === 'development' && (
+            <>
+              {error.message && <>{error.message}<br/></>}
+              {error.stack}
+            </>
+          )
+        }
+      </FeedbackMessage>
   )
 }

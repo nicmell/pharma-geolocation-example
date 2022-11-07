@@ -14,7 +14,7 @@ export type LatLngFormProps = PropsWithChildren<{
 
 export function GoogleAutocompleteForm({children, disabled, onSubmit}: LatLngFormProps) {
   const ref = useRef<HTMLInputElement>()
-  const {input, setInput, setError} = useForm()
+  const {input, setInput, setResult} = useForm()
   const [value, setValue] = useState<PlaceResult>()
 
   const handleSubmit = async () => {
@@ -27,7 +27,7 @@ export function GoogleAutocompleteForm({children, disabled, onSubmit}: LatLngFor
         location = results[0].geometry.location
         onSubmit && onSubmit({lat: location.lat(), lng: location.lng()})
       } catch (err) {
-        setError(err as Error)
+        setResult([])
       }
     }
   }
