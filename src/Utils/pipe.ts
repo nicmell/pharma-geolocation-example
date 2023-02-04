@@ -1,5 +1,6 @@
 
-function pipe<T> (...fns: ((_ : any) => T)[]) {
-  return fns.reduce((acc, fn) => (_: any) => fn(acc))
+function pipe<T = any>(...fns: ((..._: any) => any)[]) {
+  return (value: any) => fns.reverse().reduce((acc, fn) => fn(acc), value) as T
 }
+
 export default pipe
