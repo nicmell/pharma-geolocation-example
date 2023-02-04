@@ -5,7 +5,7 @@ import {immer} from "zustand/middleware/immer";
 import createRootSlice from "@/Store/slices/createRootSlice";
 import {StoreState} from "@/Typings/store";
 
-export default create<StoreState>()(
+const store = create<StoreState>()(
   devtools(
     immer(
       createRootSlice
@@ -13,3 +13,4 @@ export default create<StoreState>()(
   )
 )
 
+export default store

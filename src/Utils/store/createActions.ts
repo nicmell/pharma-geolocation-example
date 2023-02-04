@@ -12,19 +12,20 @@ export function createAction<State, Args extends unknown[]>(
   name: string,
   handler: (...args: Args) => (state: State) => void
 ) {
-  return (set: SetState<State>) => function(...args: Args) {
-    set((state) => handler(...args)(state), false, name)
+  return (slice: string, set: SetState<State>) => function(...args: Args) {
+    set((state) => handler(...args)(state), false, `${slice}/${name}`)
   }
 }
 
 function createActions<State, T extends Record<string, any>>(
+  slice: string,
   actionsMap: T
 ):
   (set: SetState<State>) => { [key in keyof T]: ReturnType<T[key]> } {
-  return function (set) {
+  return (set) => {
     const actions: any = {}
     Object.entries(actionsMap).forEach(([key, val]) => {
-      actions[key] = val(set)
+      actions[key] = val(slice, set)
     })
     return actions
   }
