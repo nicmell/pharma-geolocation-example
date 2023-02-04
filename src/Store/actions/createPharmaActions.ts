@@ -1,5 +1,6 @@
 import {PharmaData} from "@/Typings/pharma";
 import {PharmaState} from "@/Typings/store";
+import createActions from "@/Utils/store/createAction";
 
 const setLoading = (state: PharmaState) =>  (loading: boolean) => {
   state.pharma.isLoading = loading
@@ -13,11 +14,9 @@ export const setData = (state: PharmaState) => (data: PharmaData[]) => {
   state.pharma.data = data
 }
 
-const actionsMap = {
+export default createActions({
   setLoading,
   setError,
   setData
-}
-
-export default actionsMap
+})
 

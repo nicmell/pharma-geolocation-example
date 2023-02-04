@@ -2,11 +2,10 @@
 import pharmaClient from "@/Services/pharmaClient";
 import createPharmaActions from "@/Store/actions/createPharmaActions";
 import {PharmaState, StoreSlice} from "@/Typings/store";
-import createActions from "@/Utils/store/createAction";
 
 
 const createPharmaSlice :StoreSlice<PharmaState> = (set) => {
-  const {setLoading, setError, setData} = createActions(set)(createPharmaActions)
+  const {setLoading, setError, setData} = createPharmaActions(set)
   return {
     pharma: {
       data: undefined,
