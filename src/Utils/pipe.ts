@@ -1,5 +1,5 @@
 
-function pipe(...fns: ((_ :any) => any)[]) {
-  return (arg: any) => fns.reduce((acc, fn) => fn(acc), arg)
+function pipe<T> (...fns: ((_ : any) => T)[]) {
+  return fns.reduce((acc, fn) => (_: any) => fn(acc))
 }
 export default pipe

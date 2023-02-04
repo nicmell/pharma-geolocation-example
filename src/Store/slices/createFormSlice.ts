@@ -1,5 +1,3 @@
-import {devtools} from "zustand/middleware";
-import {immer} from "zustand/middleware/immer";
 
 import {FormState, StoreSlice} from "@/Typings/store";
 
@@ -10,7 +8,7 @@ const defaultState = {
 }
 
 
-export default devtools(immer((set, get) => {
+const createFormSlice : StoreSlice<FormState> = (set, get) => {
   return {
       form: {
         ...defaultState,
@@ -34,9 +32,12 @@ export default devtools(immer((set, get) => {
           })
         },
         reset: function () {
-          set((state) => {state.form = {...state.form, ...defaultState}})
+          set((state) => {
+            state.form = {...state.form, ...defaultState}
+          })
         }
       }
   }
-})) as StoreSlice<FormState>
+}
 
+export default createFormSlice

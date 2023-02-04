@@ -18,8 +18,8 @@ export type StoreState =
 
 export type StoreSlice<T> = StateCreator<
   StoreState,
-  [],
   [["zustand/devtools", never], ["zustand/immer", never]],
+  [],
   T
   >
 

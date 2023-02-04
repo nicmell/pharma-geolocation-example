@@ -1,5 +1,3 @@
-import {devtools} from "zustand/middleware";
-import {immer} from "zustand/middleware/immer";
 
 import {TravelMode} from "@/Typings/google-maps";
 import {AppSettingsState, StoreSlice} from "@/Typings/store";
@@ -11,7 +9,7 @@ const defaultState = {
 }
 
 
-export default devtools(immer((set, get) => {
+const createAppSettingsSlice: StoreSlice<AppSettingsState> = (set, get) => {
   return {
       appSettings: {
         ...defaultState,
@@ -35,5 +33,7 @@ export default devtools(immer((set, get) => {
         }
       }
   }
-})) as StoreSlice<AppSettingsState>
+}
+
+export default createAppSettingsSlice
 
