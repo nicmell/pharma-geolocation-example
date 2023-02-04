@@ -2,17 +2,18 @@
 export type SetState<State> =
   (nextState: (state: State) => void, replace: false, name: string) => void
 
-export type Action<State, Args extends unknown[]> =
-  (state: State) => (...args: Args) => void
+export type Action<State, Args extends unknown[]> = {
+  name: string
+  handler: (...args: Args) => (state: State) => void
+}
 
 
-function createAction<State, Args extends unknown[]>(
-  set: SetState<State>,
-  type: string,
-  action: Action<State, Args>
+export function createAction<State, Args extends unknown[]>(
+  name: string,
+  handler: (...args: Args) => (state: State) => void
 ) {
-  return function(...args: Args) {
-    set((state) => action(state)(...args), false, type)
+  return (set: SetState<State>) => function(...args: Args) {
+    set((state) => handler(...args)(state), false, name)
   }
 }
 
@@ -23,7 +24,7 @@ function createActions<State, T extends Record<string, any>>(
   return function (set) {
     const actions: any = {}
     Object.entries(actionsMap).forEach(([key, val]) => {
-      actions[key] = createAction(set, key, val)
+      actions[key] = val(set)
     })
     return actions
   }

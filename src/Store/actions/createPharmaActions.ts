@@ -1,18 +1,30 @@
 import {PharmaData} from "@/Typings/pharma";
 import {PharmaState} from "@/Typings/store";
-import createActions from "@/Utils/store/createAction";
+import createActions, {createAction} from "@/Utils/store/createAction";
 
-const setLoading = (state: PharmaState) =>  (loading: boolean) => {
-  state.pharma.isLoading = loading
-}
+const setLoading = createAction(
+  'setLoading',
+  function (loading: boolean) {
+    return (state: PharmaState) => {
+      state.pharma.isLoading = loading
+    }
+})
 
-const setError = (state: PharmaState) => (error: Error) => {
-  state.pharma.error = error
-}
+const setError = createAction(
+  'setError',
+  function (error: Error) {
+    return (state: PharmaState) => {
+      state.pharma.error = error
+    }
+})
 
-export const setData = (state: PharmaState) => (data: PharmaData[]) => {
-  state.pharma.data = data
-}
+const setData =  createAction(
+  'setData',
+  function (data: PharmaData[]) {
+  return (state: PharmaState) => {
+    state.pharma.data = data
+  }
+})
 
 export default createActions({
   setLoading,
